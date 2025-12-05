@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  interrail-api:
+    build: .
+    ports:
+      - "5000:80"
+      - "5001:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionStrings__MongoDB=mongodb://mongodb:27017
+      - SEQ_URL=http://seq:5341
+    depends_on:
+      - mongodb
+      - seq
+    volumes:
+      - ~/.aspnet/https:/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  seq:
+    image: datalust/seq:latest
+    ports:
+      - "5341:5341"
+    environment:
+      - ACCEPT_EULA=Y
+
+volumes:
+  mongodb_data:

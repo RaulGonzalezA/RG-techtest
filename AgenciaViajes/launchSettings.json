@@ -1,0 +1,17 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "launchBrowserTarget": "https://localhost:5001/swagger/index.html",
+      "composeLaunchServiceName": "agenciaviajes.host",
+      "composeLaunchUrl": "https://localhost:5001/swagger/index.html",
+      "serviceActions": {
+        "agenciaviajes.host": "StartDebugging",
+        "mongodb": "StartWithoutDebugging",
+        "seq": "StartWithoutDebugging"
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+services:
+  agenciaviajes.host:
+    image: ${DOCKER_REGISTRY-}agenciaviajeshost
+    build:
+      context: .
+      dockerfile: AgenciaViajes.Host/Dockerfile
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+    networks:
+      - agenciaviajes_network
+
+  mongodb:
+    image: mongo:6.0.6
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - agenciaviajes_network
+
+  seq:
+    image: datalust/seq:latest
+    ports:
+      - "5341:5341"
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINPASSWORD=password
+      - SEQ_APPSETTINGS_SeqSecurity__AppKeyAuthentication=ReadOnly
+      - SEQ_APPSETTINGS_SeqSecurity__AdminPassword=Pasword123
+      - SEQ_APPSETTINGS_SeqSecurity__EnableApiKeyAuthentication=true
+    networks:
+      - agenciaviajes_network
+volumes:
+  mongodb_data:
+
+networks:
+  agenciaviajes_network:
+    driver: bridge
+    name: agenciaviajes_network

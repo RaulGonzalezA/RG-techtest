@@ -1,0 +1,92 @@
+name: dockercompose3747045624578505575
+services:
+  agenciaviajes.host:
+    build:
+      context: D:\RG-Techtest\AgenciaViajes
+      dockerfile: AgenciaViajes.Host/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_HTTPS_PORTS: "8081"
+    image: agenciaviajeshost
+    networks:
+      agenciaviajes_network: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "5000"
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        published: "5001"
+        protocol: tcp
+      - mode: ingress
+        target: 8080
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\aberr\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\aberr\AppData\Roaming/Microsoft/UserSecrets
+        target: /root/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\aberr\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\aberr\AppData\Roaming/ASP.NET/Https
+        target: /root/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  mongodb:
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: root
+    image: mongo:6.0.6
+    networks:
+      agenciaviajes_network: null
+    ports:
+      - mode: ingress
+        target: 27017
+        published: "27017"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: mongodb_data
+        target: /data/db
+        volume: {}
+  seq:
+    environment:
+      ACCEPT_EULA: "Y"
+      SEQ_APPSETTINGS_SeqSecurity__AdminPassword: Pasword123
+      SEQ_APPSETTINGS_SeqSecurity__AppKeyAuthentication: ReadOnly
+      SEQ_APPSETTINGS_SeqSecurity__EnableApiKeyAuthentication: "true"
+      SEQ_FIRSTRUN_ADMINPASSWORD: password
+    image: datalust/seq:latest
+    networks:
+      agenciaviajes_network: null
+    ports:
+      - mode: ingress
+        target: 5341
+        published: "5341"
+        protocol: tcp
+networks:
+  agenciaviajes_network:
+    name: agenciaviajes_network
+    driver: bridge
+volumes:
+  mongodb_data:
+    name: dockercompose3747045624578505575_mongodb_data

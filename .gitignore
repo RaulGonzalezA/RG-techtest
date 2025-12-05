@@ -1,0 +1,21 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/AgenciaViajes/AgenciaViajes.Application/bin/Debug/net10.0
+/AgenciaViajes/AgenciaViajes.Application/obj
+/AgenciaViajes/AgenciaViajes.Domain/bin/Debug/net10.0
+/AgenciaViajes/AgenciaViajes.Application.Test/bin
+/AgenciaViajes/AgenciaViajes.Application.Test/obj
+/AgenciaViajes/AgenciaViajes.Domain/obj
+/AgenciaViajes/AgenciaViajes.Host/bin/Debug/net10.0
+/AgenciaViajes/AgenciaViajes.Host/obj
+/AgenciaViajes/AgenciaViajes.Infrastructure/bin/Debug/net10.0
+/AgenciaViajes/AgenciaViajes.Infrastructure/obj
+/AgenciaViajes/AgenciaViajes.Infrastructure.Test/bin
+/AgenciaViajes/AgenciaViajes.Infrastructure.Test/obj
+/AgenciaViajes/bin/Debug
+/AgenciaViajes/obj/Debug
+/.vs/RG-Techtest/v18
+/.vs
+/AgenciaViajes/.vs
