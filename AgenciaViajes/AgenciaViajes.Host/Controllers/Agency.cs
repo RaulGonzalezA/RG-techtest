@@ -1,7 +1,5 @@
 ﻿using AgenciaViajes.Application.Interfaces;
-using AgenciaViajes.Application.Services;
 using AgenciaViajes.Domain.Request;
-using Google.Protobuf.WellKnownTypes;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace AgenciaViajes.Host.Controllers
@@ -15,7 +13,7 @@ namespace AgenciaViajes.Host.Controllers
             IItineraryService itineraryService) =>
             {
                 var id = await itineraryService.SaveItineraryAsync(itineraryDto).ConfigureAwait(false);
-                return Results.Ok(new
+                return Results.CreatedAtRoute("GetItinerary", new { id }, new
                 {
                     Id = id
                 });
@@ -23,7 +21,7 @@ namespace AgenciaViajes.Host.Controllers
 				.WithName("Post Itinerary")
 			    .WithTags("Itineraries")
 			    .WithMetadata(new SwaggerOperationAttribute(summary: "Post Itinerary", description: "Adds new itinerary to the app"))
-			    .Produces(StatusCodes.Status200OK);
+			    .Produces(StatusCodes.Status201Created);
 
 			app.MapGet("/itineraries/{id}", async (
                 string id,
@@ -34,10 +32,25 @@ namespace AgenciaViajes.Host.Controllers
                     return Results.NotFound(new { Message = "Itinerary not found." });
                 return Results.Ok(itinerary);
             })
-				.WithName("Get Itinerary")
+				.WithName("GetItinerary")
 				.WithTags("Itineraries")
 				.WithMetadata(new SwaggerOperationAttribute(summary: "Get Itinerary", description: "Gets an itinerary from the app"))
-				.Produces(StatusCodes.Status200OK);
-		}
+				.Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound);
+
+            app.MapGet("/itineraries", async (
+                IItineraryService itineraryService) =>
+            {
+                var itinerary = await itineraryService.GetItinerariesAsync().ConfigureAwait(false);
+                if (itinerary == null)
+                    return Results.NotFound(new { Message = "Itineraries not found." });
+                return Results.Ok(itinerary);
+            })
+                .WithName("GetItineraries")
+                .WithTags("Itineraries")
+                .WithMetadata(new SwaggerOperationAttribute(summary: "Get Itineraries", description: "Gets all the itineraries from the app"))
+                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound);
+        }
     }
 }

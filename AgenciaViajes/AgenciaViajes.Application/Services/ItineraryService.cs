@@ -46,6 +46,11 @@ namespace AgenciaViajes.Application.Services
             return new ItineraryResponse(itinerary.Id, itinerary.Name, cities);
         }
 
+        public async Task<List<Itinerary>> GetItinerariesAsync()
+        {
+            return await itineraryRepository.FindAllAsync().ConfigureAwait(false);
+        }
+
         private static Collection<string> GetRecommendations(double temperature, bool rain)
         {
             var recommendations = new Collection<string>();

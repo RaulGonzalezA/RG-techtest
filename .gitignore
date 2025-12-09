@@ -19,3 +19,5 @@
 /.vs/RG-Techtest/v18
 /.vs
 /AgenciaViajes/.vs
+/AgenciaViajes/obj/Docker/docker-compose.vs.debug.g.yml
+*.yml

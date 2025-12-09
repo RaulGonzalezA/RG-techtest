@@ -11,12 +11,12 @@ services:
       - agenciaviajes_network
 
   mongodb:
-    image: mongo:6.0.6
+    image: mongo:latest
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=Pass1234
     volumes:
       - mongodb_data:/data/db
     networks:

@@ -1,4 +1,5 @@
-﻿using AgenciaViajes.Domain.Request;
+﻿using AgenciaViajes.Domain.Entities;
+using AgenciaViajes.Domain.Request;
 using AgenciaViajes.Domain.Response;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace AgenciaViajes.Application.Interfaces
     {
         Task<string> SaveItineraryAsync(ItineraryRequest itineraryDto);
         Task<ItineraryResponse?> GetItineraryAsync(string id);
+        Task<List<Itinerary>> GetItinerariesAsync();
     }
 }

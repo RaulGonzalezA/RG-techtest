@@ -30,6 +30,15 @@ HttpFactoriesConfigurator.ConfigureHttpFactories(builder.Services, builder.Confi
 DbConfigurator.ConfigureMongoDb(builder.Services, builder.Configuration);
 SwaggerConfigurator.ConfigureSwagger(builder.Services);
 
+builder.Services.AddCors(options => options.AddPolicy("Localhost", policy =>
+{
+    policy.WithOrigins("http://localhost:5001", "https://localhost:5001", "https://agenciaviajes.host:5001", "http://localhost:5000", "https://localhost:5000", "https://agenciaviajes.host:5000")
+          .AllowAnyHeader()
+          .AllowAnyMethod()
+          .AllowCredentials()
+          .SetIsOriginAllowed((hosts) => true);
+}));
+
 builder.Services.AddScoped<IWeatherService, OpenWeatherService>();
 builder.Services.AddScoped<IItineraryService, ItineraryService>();
 
@@ -44,7 +53,7 @@ builder.Services.AddProblemDetails(options => options.CustomizeProblemDetails = 
 MongoDBSettings agenciaSettings = new();
 builder.Configuration.GetSection(DatabaseSettings.MONGOAGENCIA).Bind(agenciaSettings);
 builder.Services
-    .AddSingleton(new MongoClient(agenciaSettings.ConnectionString))
+    .AddSingleton<IMongoClient>(new MongoClient(agenciaSettings.ConnectionString))
     .AddHealthChecks()
     .AddMongoDb(databaseNameFactory: sp => agenciaSettings.DatabaseName);
 
