@@ -21,3 +21,7 @@
 /AgenciaViajes/.vs
 /AgenciaViajes/obj/Docker/docker-compose.vs.debug.g.yml
 *.yml
+/AgenciaViajes.IntegrationTests/bin/Debug/net10.0
+/AgenciaViajes.IntegrationTests/obj
+/ArchitectureTests/bin/Debug/net10.0
+/ArchitectureTests/obj
