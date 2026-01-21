@@ -1,13 +1,19 @@
 ﻿namespace AgenciaViajes.Domain.Entities;
 
-public class City
+public class City : EntityBase
 {
-    public City(string name, DateTime date)
+    private City() : base(string.Empty)
+    {
+        Name = string.Empty;
+        Date = DateTime.MinValue;
+    }
+
+    public City(string id, string name, DateTime date) : base(id)
     {
         Name = name;
         Date = date;
     }
 
-    public string Name { get; set; }
-    public DateTime Date { get; set; }        
+    public string Name { get; private set; }
+    public DateTime Date { get; private set; }        
 }

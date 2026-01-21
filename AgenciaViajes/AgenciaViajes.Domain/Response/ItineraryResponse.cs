@@ -15,5 +15,10 @@ namespace AgenciaViajes.Domain.Response
             Name = name;
             Cities = cities;
         }
+
+        public void ShouldNotBeNull()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -6,6 +6,8 @@
     <File Path=".editorconfig" />
   </Folder>
   <Folder Name="/Tests/">
+    <Project Path="../AgenciaViajes.IntegrationTests/AgenciaViajes.IntegrationTests.csproj" Id="228d707f-50ae-4b3d-917b-9d25d0542585" />
+    <Project Path="../ArchitectureTests/AgenciaViajes.ArchitectureTests.csproj" Id="573c8528-e8bc-4df2-a850-31c42def0443" />
     <Project Path="AgenciaViajes.Application.Test/AgenciaViajes.Application.Test.csproj" />
     <Project Path="AgenciaViajes.Infrastructure.Test/AgenciaViajes.Infrastructure.Test.csproj" Id="1c494b30-9e1f-4ed1-bf92-a16ab7680521" />
   </Folder>

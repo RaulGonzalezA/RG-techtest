@@ -22,7 +22,7 @@ namespace AgenciaViajes.Application.Services
             ArgumentNullException.ThrowIfNull(itineraryDto);
             if (itineraryDto.Cities == null)
                 throw new ArgumentException("Cities collection must be provided.", nameof(itineraryDto));
-            var cities = itineraryDto.Cities.Select((city, index) => new City(city, DateTime.Today.AddDays(index))).ToList();
+            var cities = itineraryDto.Cities.Select((city, index) => new City(Guid.NewGuid().ToString(), city, DateTime.Today.AddDays(index))).ToList();
             var itinerary = new Itinerary(Guid.NewGuid().ToString(), itineraryDto.Name, new Collection<City>(cities));
 
             await itineraryRepository.InsertAsync(itinerary).ConfigureAwait(false);

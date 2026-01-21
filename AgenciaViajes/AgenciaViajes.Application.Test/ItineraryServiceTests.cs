@@ -56,8 +56,8 @@ namespace AgenciaViajes.Application.Test
             // Arrange
             var cities = new Collection<City>
             {
-                new("CityA", System.DateTime.Today),
-                new("CityB", System.DateTime.Today.AddDays(1))
+                new(Guid.NewGuid().ToString(),"CityA", System.DateTime.Today),
+                new(Guid.NewGuid().ToString(),"CityB", System.DateTime.Today.AddDays(1))
             };
 
             var itinerary = new Itinerary("id-1", "TripName", cities);

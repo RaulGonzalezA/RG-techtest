@@ -45,7 +45,7 @@ public class OpenWeatherService(IHttpClientFactory httpClientFactory, ILogger<Op
 
         HttpClient httpClient = httpClientFactory.CreateClient(wheatherClient.Value.Name);
         // Protección por tiempo máximo de petición (evita esperar indefinidamente).
-        using CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));        
+        using CancellationTokenSource cts = new(TimeSpan.FromSeconds(15));        
 
         HttpResponseMessage response;
         try
